@@ -10,15 +10,15 @@ Test case:
 forEach(["a", "b", "c"], e => {console.log(e)}); // a b c
 */
 
-
 function forEach(arr, cb) {
-    // Tu código aquí
+  for (let i = 0; i < arr.length; i++) {
+    cb(arr[i]);
   }
+}
 
-
-
-
-
+forEach(["a", "b", "c"], (e) => {
+  console.log(e);
+}); // a b c
 
 /* Ejercicio 2 -------
 
@@ -34,15 +34,15 @@ Test case:
 console.log(map([5, 6, 7], e => e * 2)); // [10, 12, 14]
 */
 
-
-
-
 function map(arr, cb) {
-    // Tu código aquí
+  let e = [];
+  for (let i = 0; i < arr.length; i++) {
+    e.push(cb(arr[i]));
   }
+  return e;
+}
 
-
-
+console.log(map([5, 6, 7], (e) => e * 2)); // [10, 12, 14]
 
 /* Ejercicio 3 -------
 
@@ -62,18 +62,17 @@ console.log(filter([5, 6, 7, 8], e => e % 2 === 0 ? true : false)); // [6, 8]
 
 */
 
-
-
-
 function filter(arr, cb) {
-    // Tu código aquí
+  let e = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (cb(arr[i])) {
+      e.push(arr[i]);
+    }
   }
+  return e;
+}
 
-
-
-
-
-
+console.log(filter([5, 6, 7, 8], (e) => (e % 2 === 0 ? true : false))); // [6, 8]
 
 /* Ejercicio 4 -------
 
@@ -94,14 +93,18 @@ console.log(every([2, 4, 6, 2], n => n < 6)); // false
 
 */
 
-
-
 function every(arr, cb) {
-    // Tu código aquí
+  for (let i = 0; i < arr.length; i++) {
+    if (!cb(arr[i])) {
+      return false;
+    }
   }
+  return true;
+}
 
-
-
+console.log(every([1, 3, 5], (n) => n < 6)); // true
+console.log(every([2, 4, 6], (n) => n < 6)); // false
+console.log(every([2, 4, 6, 2], (n) => n < 6)); // false
 
 /* Ejercicio 5 -------
 
@@ -115,19 +118,14 @@ del array "nums".
 Utiliza una arrow function.
 */
 
-
-
 const nums = [1, 2, 3, 4, 5, 6, 7, 8];
 let sum = 0;
 
 nums.forEach((e) => {
-  // Tu código aquí
+  sum += e;
 });
 
-// console.log(sum);
-
-
-
+console.log(sum);
 
 /* Ejercicio 6 -------
 
@@ -138,19 +136,13 @@ Test case:
 ["Sofia", "Pedro", "Mia"] ha de retornar ["Hello, Sofia!", "Hello, Pedro!", "Hello, Mia!"]
 */
 
-
-  
-
 const names = ["Sofia", "Pedro", "Mia"];
 
-// const greetings = // Tu código aquí
+const greetings = names.map((name) => {
+  return `Hello, ${name}!`;
+});
 
-// console.log(greetings);
-
-
-
-
-
+console.log(greetings);
 
 /* Ejercicio 7 -------
 
@@ -163,15 +155,13 @@ Test case:
 
 */
 
-
 const langs = ["JavaScript", "Python", "Go"];
 
-// const duplicate = // Tu código aquí
+const duplicate = langs.map((lang) => {
+  return lang;
+});
 
-// console.log(duplicate);
-
-
-
+console.log(duplicate);
 
 /* Ejercicio 8 -------
 
@@ -183,20 +173,17 @@ Test case:
 ["Grace Hopper", "Ruth Bader Ginsburg", "Ada Lovelace"]
 */
 
-
-
 const people = [
-    { firstname: "Grace", lastname: "Hopper" },
-    { firstname: "Ruth", lastname: "Bader Ginsburg" },
-    { firstname: "Ada", lastname: "Lovelace" },
-  ];
-  
-  // const fullnames = // Tu código aquí
-  
-  // console.log(fullnames);
+  { firstname: "Grace", lastname: "Hopper" },
+  { firstname: "Ruth", lastname: "Bader Ginsburg" },
+  { firstname: "Ada", lastname: "Lovelace" },
+];
 
+const fullnames = people.map((person) => {
+  return person.firstname + " " + person.lastname;
+});
 
-
+console.log(fullnames);
 
 /* Ejercicio 9 -------
 
@@ -217,13 +204,15 @@ El resultado debería ser [
 ]
 */
 
+const fullobjects = people.map((e) => {
+  return {
+    firstname: e.firstname,
+    lastname: e.lastname,
+    fullname: e.firstname + " " + e.lastname,
+  };
+});
 
-// const fullobjects = // Tu código aquí
-
-// console.log(fullobjects);
-
-
-
+console.log(fullobjects);
 
 /* Ejercicio 10 -------
 
@@ -236,14 +225,16 @@ Test case:
 
 */
 
-
 const numbers = [3, 7, 24, 1, 66, 89, 88, 23, 54, 54, 12, 9];
 
-// const areEven = // Tu código aquí
+const areEven = numbers.map((e) => {
+  if (e % 2 === 0) {
+    return true;
+  }
+  return false;
+});
 
-// console.log(areEven);
-
-
+console.log(areEven);
 
 /* Ejercicio 11 -------
 
@@ -256,15 +247,16 @@ Test case:
 [false, false, true, false, true, false, false, false, true, false, false, false, true]
 */
 
-
 const moreNumbers = [1, 3, 2, 2, 4, 13, 8, 6, 8, 10, 4, 12, 12];
 
-// const areInPosition = // Tu código aquí
+const areInPosition = moreNumbers.map((e, i) => {
+  if (e === i) {
+    return true;
+  }
+  return false;
+});
 
-// console.log(areInPosition);
-
-
-
+console.log(areInPosition);
 
 /* Ejercicio 12 -------
 
@@ -275,15 +267,14 @@ Test case:
 [1, 34, 83, 65, 3, 24, 98] debería "retornar" [1, 34, 3, 24]
 */
 
-
 const numsList = [1, 34, 83, 65, 3, 24, 98];
 
-// const smallNums = // Tu código aquí
+const smallNums = numsList.filter((e) =>{
+   return e < 50; 
+})
 
-// console.log(smallNums);
 
-
-
+console.log(smallNums);
 
 /* Ejercicio 13 -------
 
@@ -295,16 +286,11 @@ Test case:
 [1, 34, 83, 65, 3, 24, 98] debería "retornar" [1, 83, 65, 3]
 */
 
-
-// const oddList = // Tu código aquí
+// const oddList = numsList.filter((e) =>{
+//   return !(e % 2 === 0) 
+// })
 
 // console.log(oddList);
-
-
-
-
-
-
 
 /* Ejercicio 14 -------
 
@@ -316,16 +302,13 @@ Test case:
 [1, 0, 1, 3, 5, 6, 6, 1, 9] debería "retornar" [1, 5, 6, 9]
 */
 
-
 const moreNums = [1, 0, 1, 3, 5, 6, 6, 1, 9];
 
-// const filteredList = //  Tu código aquí
+const filteredList = moreNums.filter((e, i) =>{
+  return e > i
+})
 
-// console.log(filteredList);
-
-
-
-
+console.log(filteredList);
 
 /* Ejercicio 15 -------
 
@@ -348,14 +331,15 @@ debería "retornar"
 ]
 */
 
+const peopleWithA = people.filter ((e) =>{
+  if (e.firstname.includes("a")){
+    return true;
+  }
+  return false;
+}
+)
 
-// const peopleWithA = //  Tu código aquí
-
-// console.log(peopleWithA);
-
-
-
-
+console.log(peopleWithA);
 
 /* Ejercicio 16 -------
 
@@ -379,17 +363,13 @@ const wordList1 = ["deified", "civic", "radar", "level", "rotor"];
 const wordList2 = ["kayak", "reviver", "racecar", "reader", "madam"];
 
 function checkPalindromes(list) {
-  return list.every(() => {
-    // afegeix els paràmetres necessaris a la línia de sobre
-    // i acaba d'escriure el codi aquí
-  });
+  return list.every((e) => {
+    return (e === e.split('').reverse().join(''));
+  }); 
 }
 
-// console.log(checkPalindromes(wordList1));
-// console.log(checkPalindromes(wordList2));
-
-
-
+console.log(checkPalindromes(wordList1));
+console.log(checkPalindromes(wordList2));
 
 /* Ejercicio 17 -------
 
@@ -398,16 +378,11 @@ el funcionamiento del método "reduce".
 Después, utiliza un "reduce" para sumar todos los elementos en "numsList"
 */
 
+const total = numsList.reduce((e, i) => {
+  return e + i
+});
 
-const total = numsList.reduce(() => {
-    // añade los parámetros necesarios a la línea superior
-    // y termina de escribir tú código aquí
-  });
-  
-  // console.log(total); // debería retornar 308
-  
-
-
+console.log(total); // debería retornar 308
 
 /* Ejercicio 18 -------
 
@@ -420,14 +395,11 @@ Test case:
 [1, 34, 83, 65, 3, 24, 98] debería "retornar" [65,98]
 */
 
+const oddList = numsList.filter((e, i) =>{
+  return (e % 2 === 0 && i % 2 === 0) || (e % 2 !== 0 && i % 2 !== 0)
+})
 
-// const oddList = // tú código aquí
-
-// console.log(oddList);
-
-
-
-
+console.log(oddList);
 
 /* Ejercicio 19 -------
 
@@ -441,15 +413,9 @@ Test case:
 debería "retornar" [[20, 31, 16, 21, 21], [17, 31, 16, 21, 21]]
 */
 
+let olderTeams = 
 
-// let olderTeams = // tú código aquí
-
-// console.log(olderTeams);
-
-
-
-
-
+console.log(olderTeams);
 
 /* Ejercicio 20 -------
 
@@ -466,7 +432,6 @@ Test case:
 debería retornar [109,106]
 
 */
-
 
 // olderTeams = // tú código aquí
 
